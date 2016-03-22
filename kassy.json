@@ -1,5 +1,5 @@
 ﻿{
   "name": "DionsDesk",
-  "version": 1.0,
+  "version": 1.1,
   "startup": "desk.js"
 }

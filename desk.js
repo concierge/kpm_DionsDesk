@@ -1,17 +1,22 @@
-function deskUp() {
-	var data = {timeout:1};
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "http://harest.makereti.co.nz:9834/api/up", true);
-	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xhttp.send(JSON.stringify(data));
-}
+var request = require.safe('request');
+var i = 0;
 
-function deskDown() {
-	var data = {timeout:1};
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "http://harest.makereti.co.nz:9834/api/down", true);
-	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xhttp.send(JSON.stringify(data));
+function deskctl(dir, api, event) {
+	request.post({url:'http://harest.makereti.co.nz:9834/api/'+dir,body:JSON.stringify({timeout:1}),headers: {'content-type' : 'application/json'}}, function(error, response, body) {
+		if (error) {
+			return api.sendMessage("Dion got pissed off with you fiddling with his desk. Come back later.", event.thread_id);
+		}
+		
+		var responses = [
+			"Congrats, he's annoyed.",
+			"How about another?",
+			"Cause why not?",
+			"Keep going...",
+			"Almost there..."
+		];
+		
+		api.sendMessage(responses[i++%responses.length], event.thread_id);
+	});
 }
 
 exports.match = function(text, commandPrefix) {
@@ -34,8 +39,8 @@ exports.run = function(api, event) {
 	}
 	
 	switch (cmds[1]) {
-		case 'up': return deskUp(api, event);
-		case 'down': return deskDown(api, event);
+		case 'up': return deskctl('up', api, event);
+		case 'down': return deskctl('down', api, event);
 		default: return api.sendMessage("You are an idiot. Learn to desk please.", event.thread_id);
 	}
 	
