@@ -1,4 +1,4 @@
-var request = require.safe('request');
+var request = require('request');
 var i = 0;
 
 function deskctl(dir, api, event) {
