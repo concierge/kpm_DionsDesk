@@ -1,5 +1,11 @@
 ﻿{
-  "name": "DionsDesk",
-  "version": 1.2,
-  "startup": "desk.js"
+	"name": "DionsDesk",
+	"version": 1.2,
+	"startup": "desk.js",
+	"help": [
+		["{{commandPrefix}}dionsdesk","Calls you an idiot."],
+		["{{commandPrefix}}dionsdesk up","Annoys the Dion by moving his desk up for 1 second."],
+		["{{commandPrefix}}dionsdesk down","Crushes the Dion by moving his desk down for 1 second."]
+	],
+	"command": "dionsdesk"
 }
